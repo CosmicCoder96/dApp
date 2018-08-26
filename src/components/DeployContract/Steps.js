@@ -62,8 +62,8 @@ class BaseStepComponent extends Component {
 
       if (fieldsValue.contractName) {
         fieldsValue.contractName = Utils.createStandardizedContractName(
-          quoteAsset,
           symbolName,
+          quoteAsset,
           exchangeApi,
           expirationTimeStamp,
           fieldsValue.contractName
@@ -962,8 +962,8 @@ class ContractNameStep extends BaseStepComponent {
           <Field
             name="contractName"
             addonBefore={Utils.createStandardizedContractName(
-              quoteAsset,
               symbolName,
+              quoteAsset,
               exchangeApi,
               expirationTimeStamp,
               ''

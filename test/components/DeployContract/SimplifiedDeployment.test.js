@@ -5,6 +5,7 @@ import { shallow } from 'enzyme';
 import sinon from 'sinon';
 
 import {
+  ContractNameStep,
   PricingStep,
   ExpirationStep,
   ExchangeStep,
@@ -17,11 +18,13 @@ describe('SimplifiedDeployment', () => {
   const exchangeStep = 0;
   const pricingStep = 1;
   const expirationStep = 2;
-  const gasStep = 3;
-  const deployStep = 4;
+  const contractNameStep = 3;
+  const gasStep = 4;
+  const deployStep = 5;
 
   let simplifiedDeployment;
   let onDeployContractSpy;
+
   beforeEach(() => {
     onDeployContractSpy = sinon.spy();
     simplifiedDeployment = shallow(
@@ -29,8 +32,8 @@ describe('SimplifiedDeployment', () => {
     );
   });
 
-  it('should render 4 steps', () => {
-    expect(simplifiedDeployment.find(Steps.Step)).to.have.length(5);
+  it('should render 6 steps', () => {
+    expect(simplifiedDeployment.find(Steps.Step)).to.have.length(6);
   });
 
   it('should render ExchangeStep default', () => {
@@ -81,6 +84,11 @@ describe('SimplifiedDeployment', () => {
   it('should render ExpirationStep', () => {
     simplifiedDeployment.setState({ step: expirationStep });
     expect(simplifiedDeployment.find(ExpirationStep)).to.have.length(1);
+  });
+
+  it('should render ContractNameStep', () => {
+    simplifiedDeployment.setState({ step: contractNameStep });
+    expect(simplifiedDeployment.find(ContractNameStep)).to.have.length(1);
   });
 
   it('should render GasStep', () => {
