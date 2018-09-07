@@ -33,7 +33,7 @@
     "web3-fake-provider": "^0.1.0"
   },
   "dependencies": {
-    "@marketprotocol/abis": "^0.0.2",
+    "@marketprotocol/abis": "^0.0.3",
     "@marketprotocol/marketjs": "^0.4.0",
     "@marketprotocol/marketprotocol": "^1.3.0",
     "antd": "^3.8.1",
