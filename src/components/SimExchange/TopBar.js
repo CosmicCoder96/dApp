@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Col, Dropdown, Icon, Menu, Row } from 'antd';
+import { Col, Row, Select } from 'antd';
 import _ from 'lodash';
 
 import Loader from '../Loader';
@@ -14,17 +14,13 @@ class TopBar extends Component {
     let validContracts = _.filter(contracts, contract => {
       return contract.isSettled === false;
     });
+    const Option = Select.Option;
+    function handleChange(value, key) {
+      console.log(`selected ${value}`);
+      console.log(`selected ${key}`);
 
-    const menu = (
-      <Menu onClick={e => this.props.onSelectContract(e.item.props.contract)}>
-        {validContracts &&
-          validContracts.map(c => (
-            <Menu.Item key={c.key} contract={c}>
-              {c.CONTRACT_NAME}
-            </Menu.Item>
-          ))}
-      </Menu>
-    );
+      this.props.onSelectContract(key);
+    }
 
     return (
       <div style={{ width: '100%' }}>
@@ -32,12 +28,22 @@ class TopBar extends Component {
           <Row type="flex" justify="space-between">
             <Col lg={8} xl={8} md={12} sm={16}>
               <img alt="contract" src={contractIcon} />
-              <Dropdown overlay={menu}>
-                <Button>
-                  {contract ? contract.CONTRACT_NAME : 'Contracts'}{' '}
-                  <Icon type="down" />
-                </Button>
-              </Dropdown>
+              <Select
+                showSearch
+                style={{ width: '50%', border: 'none' }}
+                // placeholder={contract ? contract.CONTRACT_NAME : 'Contracts'}
+                placeholder="Search contracts"
+                optionFilterProp="children"
+                onChange={handleChange}
+                dropdownStyle={{ border: 'none' }}
+              >
+                {validContracts &&
+                  validContracts.map(c => (
+                    <Option value={c.key} contract={c} key={c}>
+                      {c.CONTRACT_NAME}
+                    </Option>
+                  ))}
+              </Select>
             </Col>
             <Col span={12} className="contract-meta-data">
               <p style={{ fontWeight: '500' }}>
